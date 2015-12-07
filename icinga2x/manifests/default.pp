@@ -449,41 +449,41 @@ class { 'graphite':
 ####################################
 
 # https://github.com/bfraser/puppet-grafana
-class { 'grafana':
-  cfg => {
-    app_mode => 'production',
-    server   => {
-      http_port     => 8004,
-    },
-    users    => {
-      allow_sign_up => false,
-    },
-    security => {
-      admin_user => 'admin',
-      admin_password => 'admin',
-    },
-  },
-}
-
-# there are no static config files for data sources in grafana2
-# https://github.com/grafana/grafana/issues/1789
-file { 'grafana-setup':
-  name => '/usr/local/bin/grafana-setup',
-  owner => root,
-  group => root,
-  mode => '0755',
-  source => "puppet:////vagrant/files/usr/local/bin/grafana-setup",
-}
-
-file { 'grafana-dashboard-icinga2':
-  name => '/etc/icinga2/grafana-dashboard-icinga2.json',
-  owner => root,
-  group => root,
-  mode => '0644',
-  source => "puppet:////vagrant/files/etc/icinga2/grafana-dashboard-icinga2.json",
-}
-exec { 'finish-grafana-setup':
-  path => '/bin:/usr/bin:/sbin:/usr/sbin',
-  command => "/usr/local/bin/grafana-setup",
-  require => [ File['grafana-setup'], File['grafana-dashboard-icinga2'], Class['graphite'], Class['grafana'] ],
-}
+#class { 'grafana':
+#  cfg => {
+#    app_mode => 'production',
+#    server   => {
+#      http_port     => 8004,
+#    },
+#    users    => {
+#      allow_sign_up => false,
+#    },
+#    security => {
+#      admin_user => 'admin',
+#      admin_password => 'admin',
+#    },
+#  },
+#}
+#
+## there are no static config files for data sources in grafana2
+## https://github.com/grafana/grafana/issues/1789
+#file { 'grafana-setup':
+#  name => '/usr/local/bin/grafana-setup',
+#  owner => root,
+#  group => root,
+#  mode => '0755',
+#  source => "puppet:////vagrant/files/usr/local/bin/grafana-setup",
+#}
+#
+#file { 'grafana-dashboard-icinga2':
+#  name => '/etc/icinga2/grafana-dashboard-icinga2.json',
+#  owner => root,
+#  group => root,
+#  mode => '0644',
+#  source => "puppet:////vagrant/files/etc/icinga2/grafana-dashboard-icinga2.json",
+#}
+#exec { 'finish-grafana-setup':
+#  path => '/bin:/usr/bin:/sbin:/usr/sbin',
+#  command => "/usr/local/bin/grafana-setup",
+#  require => [ File['grafana-setup'], File['grafana-dashboard-icinga2'], Class['graphite'], Class['grafana'] ],
+#}
