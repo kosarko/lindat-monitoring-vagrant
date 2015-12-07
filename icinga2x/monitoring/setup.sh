@@ -6,7 +6,7 @@ wget -O "html-xml-utils.rpm" "ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensu
 popd
 
 #git clone
-REPO_URL=https://github.com/kosarko/lindat-monitoring.git
+REPO_URL=https://github.com/ufal/lindat-monitoring.git
 pushd /opt
 git clone $REPO_URL lindat-monitoring
 echo 'include_recursive "/opt/lindat-monitoring/ufal.d"' >> /etc/icinga2/icinga2.conf
